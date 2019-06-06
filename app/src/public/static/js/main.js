@@ -8,7 +8,7 @@ const initialize = async () => {
       locs[locs.length - 1].lat,
       locs[locs.length - 1].long
     ),
-    zoom: 8,
+    zoom: 16,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 

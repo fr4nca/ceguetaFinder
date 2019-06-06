@@ -8,7 +8,7 @@ class MapController {
   }
 
   static async post(req, res, next) {
-    const loc = await Location.create(req.body);
+    const loc = await Location.create(req.query);
     req.io.emit('newLoc', loc);
     res.json(loc);
   }

@@ -5,7 +5,6 @@ const app = express();
 const server = http.Server(app);
 const io = require('socket.io')(server);
 const hbs = require('express-handlebars');
-const bodyParser = require('body-parser');
 require('dotenv').config();
 
 // Configs
@@ -21,8 +20,8 @@ app.engine(
 
 // Middlewares
 app.use(express.static(path.join(__dirname, 'src', 'public', 'static')));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Routes
 app.use('*', (req, res, next) => {
@@ -36,6 +35,6 @@ app.get('/', (req, res) => {
   res.render('index', { key: process.env.google_api });
 });
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3000;
 
 server.listen(port, () => console.log(`Server running on port ${port}`));
