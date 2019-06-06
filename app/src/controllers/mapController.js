@@ -1,5 +1,4 @@
 const { Location } = require('../../app/models');
-const moment = require('moment');
 
 class MapController {
   static async get(req, res, next) {
