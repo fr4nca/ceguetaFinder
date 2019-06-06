@@ -1,9 +1,16 @@
+const { Location } = require('../../app/models');
+const moment = require('moment');
+
 class MapController {
-  static get(req, res, next) {
-    setInterval(() => {
-      req.io.emit('msg', { msg: 'oi from mapcontroller from io' });
-    }, 3000);
-    res.json({ msg: 'oi from controller from json' });
+  static async get(req, res, next) {
+    const locations = await Location.findAll();
+    res.json(locations);
+  }
+
+  static async post(req, res, next) {
+    const loc = await Location.create(req.body);
+    req.io.emit('newLoc', loc);
+    res.json(loc);
   }
 }
 
