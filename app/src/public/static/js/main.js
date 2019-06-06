@@ -1,4 +1,13 @@
-const socket = io();
+const onLoad = async () => {
+  const res = await fetch('/api/map');
+  const data = await res.json();
+  const h1 = document.createElement('h1');
+  h1.innerText = data.msg;
 
-socket.emit("msg", { msg: "oi" });
-socket.on("oi", msg => console.log(msg));
+  const main = document.getElementById('app');
+  main.appendChild(h1);
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  onLoad();
+});

@@ -4,7 +4,6 @@ const http = require('http');
 const app = express();
 const server = http.Server(app);
 const io = require('socket.io')(server);
-require('./src/controllers/ioController')(io);
 const hbs = require('express-handlebars');
 
 // Configs
@@ -22,6 +21,10 @@ app.engine(
 app.use(express.static(path.join(__dirname, 'src', 'public', 'static')));
 
 // Routes
+app.use('*', (req, res, next) => {
+  req.io = io;
+  next();
+});
 app.use('/api/map', require('./src/routes/api/map'));
 app.get('/', (req, res) => {
   res.render('index');

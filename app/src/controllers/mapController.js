@@ -1,6 +1,9 @@
 class MapController {
   static get(req, res, next) {
-    res.send("oi from controller");
+    setInterval(() => {
+      req.io.emit('msg', { msg: 'oi from mapcontroller from io' });
+    }, 3000);
+    res.json({ msg: 'oi from controller from json' });
   }
 }
 
