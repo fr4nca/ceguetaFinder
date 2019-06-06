@@ -29,14 +29,13 @@ app.use('*', (req, res, next) => {
   req.io = io;
   next();
 });
+
 app.use('/api/map', require('./src/routes/api/map'));
+
 app.get('/', (req, res) => {
   res.render('index', { key: process.env.google_api });
 });
-app.get('/about', (req, res) => {
-  res.render('about');
-});
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 
 server.listen(port, () => console.log(`Server running on port ${port}`));
